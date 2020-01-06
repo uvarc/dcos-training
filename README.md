@@ -90,7 +90,7 @@ Services can be defined using standard JSON templates, and then run from the com
 {
   "labels": {
     "HAPROXY_GROUP": "external",
-    "HAPROXY_0_VHOST": "neal.uvadcos.io"
+    "HAPROXY_0_VHOST": "hostname.uvadcos.io"
   },
   "id": "/neal/nginx",
   "backoffFactor": 1.15,
@@ -102,8 +102,7 @@ Services can be defined using standard JSON templates, and then run from the com
       {
         "containerPort": 80,
         "hostPort": 0,
-        "protocol": "tcp",
-        "servicePort": 10026
+        "protocol": "tcp"
       }
     ],
     "docker": {
@@ -133,52 +132,20 @@ Services can be defined using standard JSON templates, and then run from the com
     "inactiveAfterSeconds": 0,
     "expungeAfterSeconds": 0
   },
-  "role": "neal",
-  "tasksStats": {
-    "startedAfterLastScaling": {
-      "stats": {
-        "counts": {
-          "staged": 0,
-          "running": 1,
-          "healthy": 0,
-          "unhealthy": 0
-        },
-        "lifeTime": {
-          "averageSeconds": 4670032.063,
-          "medianSeconds": 4670032.063
-        }
-      }
-    },
-    "withLatestConfig": {
-      "stats": {
-        "counts": {
-          "staged": 0,
-          "running": 1,
-          "healthy": 0,
-          "unhealthy": 0
-        },
-        "lifeTime": {
-          "averageSeconds": 4670032.063,
-          "medianSeconds": 4670032.063
-        }
-      }
-    },
-    "totalSummary": {
-      "stats": {
-        "counts": {
-          "staged": 0,
-          "running": 1,
-          "healthy": 0,
-          "unhealthy": 0
-        },
-        "lifeTime": {
-          "averageSeconds": 4670032.063,
-          "medianSeconds": 4670032.063
-        }
-      }
+  "healthChecks": [
+    {
+      "gracePeriodSeconds": 15,
+      "ignoreHttp1xx": false,
+      "intervalSeconds": 3,
+      "maxConsecutiveFailures": 2,
+      "portIndex": 0,
+      "timeoutSeconds": 2,
+      "delaySeconds": 15,
+      "protocol": "HTTP",
+      "path": "/",
+      "ipProtocol": "IPv4"
     }
-  },
-  "healthChecks": [],
+  ],
   "fetch": [],
   "constraints": []
 }
